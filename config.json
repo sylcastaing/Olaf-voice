@@ -1,0 +1,11 @@
+{
+  "keys": {
+    "APIAI": "bcf57eb29d0c4dde98d19054df85c695",
+    "weather": "42d00fb0c3d9bc87faff92af7a193129"
+  },
+
+  "params": {
+    "city": "Merignac",
+    "lang": "fr"
+  }
+}
