@@ -24,6 +24,10 @@ class Config:
   def city(self):
     return self.getConfigFile()['params']['city']
 
+  @property
+  def days(self):
+    return self.getConfigFile()['days']
+
   def getConfigFile(self):
     with open('./config.json') as data:
       return json.load(data)

@@ -6,6 +6,7 @@ import json
 
 from config.config import Config
 from weather import Weather
+from google.olaf_calendar import OlafCalendar
 
 class Bot:
 
@@ -15,6 +16,7 @@ class Bot:
     self.lang = self.config.lang
 
     self.weather = Weather()
+    self.calendar = OlafCalendar()
 
   def request(self, query):
     request = self.ai.text_request()
@@ -58,5 +60,7 @@ class Bot:
 
     if (name == "weather"):
       speech = self.weather.getWeather(context)
+    elif (name == "calendar"):
+      speech = self.calendar.getCalendar(context)
 
     return speech

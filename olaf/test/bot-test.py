@@ -13,7 +13,7 @@ from bot.bot import Bot
 
 def main():
     monBot = Bot()
-    print monBot.request(sys.argv[1].encode("utf8"))
-
+    #print monBot.request(sys.argv[1].encode("utf8"))
+    print monBot.request("Comment tu t'appel ?")
 if __name__ == '__main__':
     main()

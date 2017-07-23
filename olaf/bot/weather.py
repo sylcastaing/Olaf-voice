@@ -17,11 +17,11 @@ class Weather:
     self.city = self.config.city
 
   def getWeather(self, context):
-    speech = "C'est pas encore prêt"
+    speech = "La météo est indisponible pour les paramètres que tu m'as donné"
     parameters = context["parameters"]
 
     weather = self.callWeatherAPI(parameters["address"], parameters["date-time"])
-    print parameters
+
     if (weather != None):
       speech = "Voici les prévision météo "
 
