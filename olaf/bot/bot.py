@@ -4,9 +4,9 @@
 import apiai
 import json
 
-from config.config import Config
+from olaf.config.config import Config
 from weather import Weather
-from google.olaf_calendar import OlafCalendar
+from olaf.google.olaf_calendar import OlafCalendar
 
 class Bot:
 
@@ -46,10 +46,13 @@ class Bot:
 
   def getContext(self, result):
     context = None
-    contexts = result["contexts"]
 
-    if (len(contexts) > 0):
-      context = contexts[0]
+    action = result["action"]
+    if (action != None and action != "" and (("weather" in action) or ("calendar" in action))):
+      contexts = result["contexts"]
+
+      if (len(contexts) > 0):
+        context = contexts[0]
 
     return context
 

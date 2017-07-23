@@ -5,7 +5,7 @@ import httplib2
 import datetime
 
 from credentials import Credentials
-from config.config import Config
+from olaf.config.config import Config
 from apiclient import discovery
 
 class OlafCalendar:

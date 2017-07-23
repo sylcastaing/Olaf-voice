@@ -6,7 +6,7 @@ import json
 import time
 import datetime
 
-from config.config import Config
+from olaf.config.config import Config
 
 class Weather:
 

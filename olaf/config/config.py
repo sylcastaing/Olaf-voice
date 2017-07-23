@@ -9,6 +9,10 @@ class Config:
     self.test = "aze"
 
   @property
+  def bing_key(self):
+    return self.getConfigFile()['keys']['bing']
+
+  @property
   def apiai_key(self):
     return self.getConfigFile()['keys']['APIAI']
 
