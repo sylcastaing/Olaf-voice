@@ -36,7 +36,7 @@ class OlafCalendar:
         speech += dateTimeText
         showDay = False
       
-      speech += " : "
+      speech += ", : "
 
       for event in events:
         speech += self.getEventDisplay(event, showDay) + ", "
@@ -71,7 +71,7 @@ class OlafCalendar:
     if (showDay):
       eventName += self.config.days[dateTime.weekday()].encode("utf8") + " "
 
-    eventName += "à " + str(dateTime.hour) + " heure"
+    eventName += ", à " + str(dateTime.hour) + " heure"
 
     if (dateTime.minute > 0):
       eventName += " " + str(dateTime.minute)

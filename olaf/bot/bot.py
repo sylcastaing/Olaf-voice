@@ -6,9 +6,12 @@ import json
 
 from olaf.config.config import Config
 from weather import Weather
+from hour import Hour
 from olaf.google.olaf_calendar import OlafCalendar
 
 class Bot:
+
+  ACTIONS_NAME = ["weather", "calendar", "hour"]
 
   def __init__(self):
     self.config = Config()
@@ -17,6 +20,7 @@ class Bot:
 
     self.weather = Weather()
     self.calendar = OlafCalendar()
+    self.hour = Hour()
 
   def request(self, query):
     request = self.ai.text_request()
@@ -35,35 +39,51 @@ class Bot:
       result = response["result"]
 
       if (result != None):
-        context = self.getContext(result)
+        action = result["action"]
 
-        if (context != None):
-          speech = self.parseContext(context)
+        if (self.actionNameDefine(action)):
+          context = self.getContext(result, action)
+
+          if (context != None):
+            speech = self.parseContext(context)
+          else:
+            speech = result["fulfillment"]["speech"].encode("utf8")
         else:
           speech = result["fulfillment"]["speech"].encode("utf8")
-    
+
     return speech
 
-  def getContext(self, result):
+  def getContext(self, result, action):
     context = None
 
-    action = result["action"]
-    if (action != None and action != "" and (("weather" in action) or ("calendar" in action))):
-      contexts = result["contexts"]
+    contexts = result["contexts"]
 
-      if (len(contexts) > 0):
-        context = contexts[0]
+    for c in contexts:
+      if (c["name"] in action):
+        context = c
+        break
 
     return context
+
+  def actionNameDefine(self, action):
+    define = False
+
+    for name in self.ACTIONS_NAME:
+      if (name in action):
+        define = True
+        break
+
+    return define
 
   def parseContext(self, context):
     speech = "Désolé, je ne sais pas encore traiter cette requete"
 
     name = context["name"]
-
+    print(name)
     if (name == "weather"):
       speech = self.weather.getWeather(context)
     elif (name == "calendar"):
       speech = self.calendar.getCalendar(context)
-
+    elif (name == "hour"):
+      speech = self.hour.getHour()
     return speech
