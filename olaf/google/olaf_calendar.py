@@ -14,7 +14,7 @@ class OlafCalendar:
     self.config = Config()
     self.days = self.config.days
 
-  def getCalendar(self, context):
+  def proceed(self, context):
     speech = ""
     parameters = context["parameters"]
 

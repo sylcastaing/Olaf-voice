@@ -16,7 +16,7 @@ class Weather:
     self.lang = self.config.lang
     self.city = self.config.city
 
-  def getWeather(self, context):
+  def proceed(self, context):
     speech = "La météo est indisponible pour les paramètres que tu m'as donné"
     parameters = context["parameters"]
 
