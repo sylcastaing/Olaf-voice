@@ -9,10 +9,11 @@ from weather import Weather
 from hour import Hour
 from olaf.google.olaf_calendar import OlafCalendar
 from calculator import Calculator
+from wikipedia import Wikipedia
 
 class Bot:
 
-  ACTIONS_NAME = ["weather", "calendar", "hour", "calculator"]
+  ACTIONS_NAME = ["weather", "calendar", "hour", "calculator", "wikipedia"]
 
   def __init__(self):
     self.config = Config()
@@ -23,7 +24,8 @@ class Bot:
       self.ACTIONS_NAME[0]: Weather(),
       self.ACTIONS_NAME[1]: OlafCalendar(),
       self.ACTIONS_NAME[2]: Hour(),
-      self.ACTIONS_NAME[3]: Calculator()
+      self.ACTIONS_NAME[3]: Calculator(),
+      self.ACTIONS_NAME[4]: Wikipedia()
     }
 
   def request(self, query):

@@ -8,11 +8,7 @@ def main():
     monBot = Bot()
     #print monBot.request(sys.argv[1].encode("utf8"))
     print monBot.request("Quel heure est-il ?")
-    print monBot.request("Je t'aime")
-    print monBot.request("Combien font 1 plus 1 ?")
-    print monBot.request("Quel est le récultat de 100 divisé par 10 ?")
-    print monBot.request("Combien fait 30 moins 5 ?")
-    print monBot.request("Combien fait 20 fois 5 ?")
+    print monBot.request("Cherche sur Wikipedia qui est Emmanuel Macron")
 
 if __name__ == '__main__':
     main()
