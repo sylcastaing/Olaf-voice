@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-from olaf.config.config import Config
+from olaf.config import Logger
 from olaf.bot.bot import Bot
 
 def main():
     monBot = Bot()
+    Logger()
     #print monBot.request(sys.argv[1].encode("utf8"))
-    print monBot.request("Quel heure est-il ?")
-    print monBot.request("Cherche sur Wikipedia qui est Emmanuel Macron")
+    monBot.request("Quel jour sommes nous ?")
+    monBot.request("Salut")
 
 if __name__ == '__main__':
     main()

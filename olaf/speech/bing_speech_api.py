@@ -141,7 +141,8 @@ class BingSpeechAPI:
         if gender not in ["Female", "Male", "Female2"]:
             gender = "Female"
 
-        if len(lang) == 1:
+        if len(lang) == 1:#!/usr/bin/env python
+# -*- coding: utf-8 -*-
             gender = lang.keys()[0]
 
         service_name = lang[gender]

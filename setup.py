@@ -10,5 +10,5 @@ setup(
   author_email='castaing.sylvain@gmail.com',
   packages=find_packages(include=['olaf']),
   include_package_data=True,
-  install_requires=['apiai', 'requests', 'google-api-python-client'],
+  install_requires=['apiai', 'requests', 'google-api-python-client', 'pygelf'],
 )

@@ -4,8 +4,8 @@
 import httplib2
 import datetime
 
-from credentials import Credentials
-from olaf.config.config import Config
+from olaf.google import Credentials
+from olaf.config import Config
 from apiclient import discovery
 
 class OlafCalendar:

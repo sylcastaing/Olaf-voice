@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from bing_speech_api import BingSpeechAPI
-
-from olaf.config.config import Config
+from olaf.speech import BingSpeechAPI
+from olaf.config import Config
 
 class Speech:
 

@@ -4,16 +4,16 @@
 import apiai
 import json
 
-from olaf.config.config import Config
-from weather import Weather
-from hour import Hour
-from olaf.google.olaf_calendar import OlafCalendar
-from calculator import Calculator
-from wikipedia import Wikipedia
+import logging
+
+from olaf.config import Config
+from olaf.bot.features import Calculator, Day, Hour, OlafCalendar, Weather, Wikipedia
 
 class Bot:
 
-  ACTIONS_NAME = ["weather", "calendar", "hour", "calculator", "wikipedia"]
+  ACTIONS_NAME = ["weather", "calendar", "hour", "calculator", "wikipedia", "day"]
+
+  logger = logging.getLogger('olaf-voice.bot')
 
   def __init__(self):
     self.config = Config()
@@ -25,7 +25,8 @@ class Bot:
       self.ACTIONS_NAME[1]: OlafCalendar(),
       self.ACTIONS_NAME[2]: Hour(),
       self.ACTIONS_NAME[3]: Calculator(),
-      self.ACTIONS_NAME[4]: Wikipedia()
+      self.ACTIONS_NAME[4]: Wikipedia(),
+      self.ACTIONS_NAME[5]: Day()
     }
 
   def request(self, query):
@@ -36,7 +37,17 @@ class Bot:
 
     response = json.loads(request.getresponse().read())
 
-    return self.parse(response)
+    self.logger.debug("[request] API.AI result : %s", response)
+
+    speech = ""
+
+    try:
+      speech = self.parse(response)
+      self.logger.debug("[request] result : %s", speech)
+    except Exception as e:
+      self.logger.exception("[request] technical error on parsing")
+
+    return speech
 
   def parse(self, response):
     speech = "Désolé, je n'ai pas pu traiter ta requete"
