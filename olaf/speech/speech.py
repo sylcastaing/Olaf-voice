@@ -4,7 +4,11 @@
 from olaf.speech import BingSpeechAPI
 from olaf.config import Config
 
+import logging
+
 class Speech:
+  
+  logger = logging.getLogger('olaf-voice.speech.speech')
 
   def __init__(self):
     self.config = Config()
@@ -16,7 +20,7 @@ class Speech:
     try:
       text = self.bing.recognize(data, "fr-FR")
     except Exception as e:
-      print(e.message)
+      Speech.logger.error(e.message)
     
     return text
 

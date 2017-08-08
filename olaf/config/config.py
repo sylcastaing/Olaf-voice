@@ -32,6 +32,10 @@ class Config:
   def days(self):
     return self.getConfigFile()['days']
 
+  @property
+  def months(self):
+    return self.getConfigFile()['months']
+
   def getConfigFile(self):
     with open('./config.json') as data:
       return json.load(data)

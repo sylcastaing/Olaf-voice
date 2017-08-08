@@ -11,11 +11,11 @@ from respeaker import Microphone, Player, pixel_ring
 from olaf import Bot, Speech
 from olaf.config import Logger
 
+logger = logging.getLogger('olaf-voice.main')
+
 def task(quit_event):
     mic = Microphone(quit_event=quit_event)
     player = Player(mic.pyaudio_instance)
-
-    logger = logging.getLogger('olaf-voice.main')
 
     pixel_ring.set_color(rgb=0x505000)
     time.sleep(3)
@@ -45,6 +45,9 @@ def task(quit_event):
 
 def main():
     Logger()
+
+    logger.info("Starting application")
+
     quit_event = Event()
     thread = Thread(target=task, args=(quit_event,))
     thread.start()
@@ -52,7 +55,7 @@ def main():
         try:
             time.sleep(1)
         except KeyboardInterrupt:
-            print('Quit')
+            logger.info("KeyboardInterrupt = Quit")
             quit_event.set()
             break
     thread.join()

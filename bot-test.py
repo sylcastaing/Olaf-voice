@@ -8,7 +8,9 @@ def main():
     Logger()
     #print monBot.request(sys.argv[1].encode("utf8"))
     monBot.request("Quel jour sommes nous ?")
-    monBot.request("Salut")
+    monBot.request("Quel jour serons nous demain ?")
+    monBot.request("Quel jour serons nous le 12 octobre ?")
+    #monBot.request("Salut")
 
 if __name__ == '__main__':
     main()

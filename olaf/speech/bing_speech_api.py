@@ -21,6 +21,8 @@ import wave
 
 import requests
 
+import logging
+
 try: # Python 2 and Python <= 3.2
     from monotonic import monotonic
 except: # Python >= 3.3
@@ -32,6 +34,9 @@ class RequestError(Exception):
 
 
 class BingSpeechAPI:
+
+    logger = logging.getLogger('olaf-voice.speech.bing_speech_api')
+
     def __init__(self, key=os.getenv('BING_KEY', '')):
         self.key = key
         self.access_token = None
@@ -57,7 +62,7 @@ class BingSpeechAPI:
             "ja-JP": {"Female": "Microsoft Server Speech Text to Speech Voice (ja-JP, Ayumi, Apollo)",
                       "Male": "Microsoft Server Speech Text to Speech Voice (ja-JP, Ichiro, Apollo)"},
             "pt-BR": {"Male": "Microsoft Server Speech Text to Speech Voice (pt-BR, Daniel, Apollo)"},
-            "ru-RU": {"Female": "Microsoft Server Speech Text to Speech Voice (pt-BR, Daniel, Apollo)",
+            "ru-RU": {"Femalimport logginge": "Microsoft Server Speech Text to Speech Voice (pt-BR, Daniel, Apollo)",
                       "Male": "Microsoft Server Speech Text to Speech Voice (ru-RU, Pavel, Apollo)"},
             "zh-CN": {"Female": "Microsoft Server Speech Text to Speech Voice (zh-CN, HuihuiRUS)",
                       "Female2": "Microsoft Server Speech Text to Speech Voice (zh-CN, Yaoyao, Apollo)",
@@ -210,13 +215,13 @@ def main():
 
     def test(text, stream=None):
         try:
-            print('TTS:{}'.format(text))
+            BingSpeechAPI.logger.debug('TTS:{}'.format(text))
             speech = bing.synthesize(text, stream=stream)
             text = bing.recognize(speech, language='en-US')
-            print('STT:{}'.format(text.encode('utf-8')))
-            print('Stream mode:{}'.format('yes' if stream else 'no'))
+            BingSpeechAPI.logger.debug('STT:{}'.format(text.encode('utf-8')))
+            BingSpeechAPI.logger.debug('Stream mode:{}'.format('yes' if stream else 'no'))
         except RequestError as e:
-            print("Could not request results from Microsoft Bing Voice Recognition service; {0}".format(e))
+            BingSpeechAPI.logger.error("Could not request results from Microsoft Bing Voice Recognition service; {0}".format(e))
 
     texts = [
         'Your beliefs become your thoughts',
@@ -228,8 +233,8 @@ def main():
     ]
 
     for n, text in enumerate(texts):
-        print('No.{} try'.format(n))
-        print(timeit.timeit(lambda: test(text, n & 1), number=1))
+        logger.debug('No.{} try'.format(n))
+        logger.debug(timeit.timeit(lambda: test(text, n & 1), number=1))
 
 if __name__ == '__main__':
     main()

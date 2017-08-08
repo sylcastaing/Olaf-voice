@@ -37,15 +37,15 @@ class Bot:
 
     response = json.loads(request.getresponse().read())
 
-    self.logger.debug("[request] API.AI result : %s", response)
+    Bot.logger.debug("[request] API.AI result : %s", response)
 
     speech = ""
 
     try:
       speech = self.parse(response)
-      self.logger.debug("[request] result : %s", speech)
+      Bot.logger.debug("[request] result : %s", speech)
     except Exception as e:
-      self.logger.exception("[request] technical error on parsing")
+      Bot.logger.exception("[request] technical error on parsing")
 
     return speech
 
